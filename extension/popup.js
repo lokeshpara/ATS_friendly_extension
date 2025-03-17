@@ -198,7 +198,49 @@ function displayResults(result) {
     // Always show the results section first
     resultsSection.classList.remove('hidden');
     
-    // Create the initial results structure
+    // Check if this is a generation result (has generatedResume or generatedCoverLetter)
+    const isGenerationResult = result.generatedResume || result.generatedCoverLetter;
+
+    if (isGenerationResult) {
+        // Display for generated documents
+        resultsSection.innerHTML = '';
+
+        if (result.generatedResume) {
+            const resumeSection = document.createElement('div');
+            resumeSection.className = 'bg-white rounded-lg p-4 shadow-md mb-4';
+            resumeSection.innerHTML = `
+                <h2 class="text-xl font-semibold mb-3">Generated Resume</h2>
+                <div class="bg-gray-50 p-4 rounded whitespace-pre-wrap">${result.generatedResume}</div>
+            `;
+            resultsSection.appendChild(resumeSection);
+        }
+
+        if (result.generatedCoverLetter) {
+            const coverLetterSection = document.createElement('div');
+            coverLetterSection.className = 'bg-white rounded-lg p-4 shadow-md mb-4';
+            coverLetterSection.innerHTML = `
+                <h2 class="text-xl font-semibold mb-3">Generated Cover Letter</h2>
+                <div class="bg-gray-50 p-4 rounded whitespace-pre-wrap">${result.generatedCoverLetter}</div>
+            `;
+            resultsSection.appendChild(coverLetterSection);
+        }
+
+        if (result.suggestions && result.suggestions.length > 0) {
+            const suggestionsSection = document.createElement('div');
+            suggestionsSection.className = 'bg-white rounded-lg p-4 shadow-md mb-4';
+            suggestionsSection.innerHTML = `
+                <h2 class="text-xl font-semibold mb-3">Optimization Tips</h2>
+                <ul class="list-disc pl-4">
+                    ${result.suggestions.map(suggestion => `<li class="text-gray-700">${suggestion}</li>`).join('')}
+                </ul>
+            `;
+            resultsSection.appendChild(suggestionsSection);
+        }
+        
+        return;
+    }
+
+    // Display for analysis results
     resultsSection.innerHTML = `
         <div class="bg-white rounded-lg p-4 shadow-md mb-4">
             <h2 class="text-xl font-semibold mb-3">Resume Analysis</h2>
@@ -332,27 +374,6 @@ function displayResults(result) {
                 </div>
             `;
             resultsSection.insertBefore(overallFeedbackSection, resultsSection.firstChild);
-        }
-
-        // Display generated content if available
-        if (result.generatedResume) {
-            const resumeSection = document.createElement('div');
-            resumeSection.className = 'bg-white rounded-lg p-4 shadow-md mb-4';
-            resumeSection.innerHTML = `
-                <h3 class="text-xl font-semibold mb-2">Generated Resume</h3>
-                <div class="bg-gray-50 p-4 rounded whitespace-pre-wrap">${result.generatedResume}</div>
-            `;
-            resultsSection.appendChild(resumeSection);
-        }
-
-        if (result.generatedCoverLetter) {
-            const coverLetterSection = document.createElement('div');
-            coverLetterSection.className = 'bg-white rounded-lg p-4 shadow-md mb-4';
-            coverLetterSection.innerHTML = `
-                <h3 class="text-xl font-semibold mb-2">Generated Cover Letter</h3>
-                <div class="bg-gray-50 p-4 rounded whitespace-pre-wrap">${result.generatedCoverLetter}</div>
-            `;
-            resultsSection.appendChild(coverLetterSection);
         }
 
         // Scroll to results
