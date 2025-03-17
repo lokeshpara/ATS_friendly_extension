@@ -1,0 +1,1 @@
+# ATS_friendly_extension
