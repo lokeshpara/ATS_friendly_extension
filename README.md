@@ -33,31 +33,70 @@ ATS_Optimize/
 └── README.md            # This file
 ```
 
-## Setup
+## Setup Instructions
+
+### Prerequisites
+
+- Python 3.8 or higher
+- Google Chrome browser
+- pip (Python package installer)
+- Git (optional, for cloning)
 
 ### Server Setup
 
-1. Navigate to the server directory:
-   ```bash
+#### Windows
+
+1. Open Command Prompt or PowerShell
+2. Navigate to the server directory:
+   ```cmd
    cd server
    ```
-
-2. Install required Python packages:
-   ```bash
+3. Create and activate a virtual environment:
+   ```cmd
+   python -m venv venv
+   .\venv\Scripts\activate
+   ```
+4. Install required packages:
+   ```cmd
    pip install -r requirements.txt
    ```
-
-3. Set up your OpenAI API key:
-   ```bash
-   export OPENAI_API_KEY='your-api-key-here'
+5. Set OpenAI API key:
+   ```cmd
+   set OPENAI_API_KEY=your-api-key-here
    ```
-
-4. Start the Flask server:
-   ```bash
+6. Start the server:
+   ```cmd
    python app.py
    ```
 
+#### macOS/Linux
+
+1. Open Terminal
+2. Navigate to the server directory:
+   ```bash
+   cd server
+   ```
+3. Create and activate a virtual environment:
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate
+   ```
+4. Install required packages:
+   ```bash
+   pip3 install -r requirements.txt
+   ```
+5. Set OpenAI API key:
+   ```bash
+   export OPENAI_API_KEY='your-api-key-here'
+   ```
+6. Start the server:
+   ```bash
+   python3 app.py
+   ```
+
 ### Chrome Extension Setup
+
+The extension setup is the same for all operating systems:
 
 1. Open Chrome and navigate to `chrome://extensions/`
 2. Enable "Developer mode" in the top right
@@ -82,21 +121,46 @@ ATS_Optimize/
 2. Provide your experience details
 3. Click "Generate" to create optimized documents
 
+## Troubleshooting
+
+### Windows
+- If you get a "python not found" error, ensure Python is added to your PATH
+- If you get a permission error, run Command Prompt as Administrator
+- For SSL errors, you may need to install OpenSSL: `pip install pyOpenSSL`
+
+### macOS
+- If you get a "python3 not found" error, install Python using Homebrew: `brew install python3`
+- For permission errors: `sudo chmod -R 755 server/`
+- If pip fails, try: `pip3 install --user -r requirements.txt`
+
+### Linux
+- Install Python: `sudo apt-get install python3 python3-pip` (Ubuntu/Debian)
+- For permission errors: `sudo chmod +x server/app.py`
+- If pip fails: `sudo pip3 install -r requirements.txt`
+
+### Common Issues
+- Server not starting: Check if port 5002 is in use
+- Extension not loading: Verify manifest.json is valid
+- API errors: Verify OpenAI API key is set correctly
+- File upload issues: Check file format (PDF/DOC/DOCX)
+
 ## Development
 
 - Server runs on `http://localhost:5002`
 - Extension communicates with the server via REST API
 - Uses OpenAI's API for document analysis and generation
 
-## Dependencies
+### Dependencies
 
-### Server
+#### Server
 - Flask
 - OpenAI
 - NLTK
 - Python 3.x
+- pdfminer.six (for PDF processing)
+- python-docx (for DOCX processing)
 
-### Extension
+#### Extension
 - Chrome Extension Manifest V3
 - Tailwind CSS
 - Modern JavaScript (ES6+)
@@ -108,6 +172,13 @@ ATS_Optimize/
 3. Commit your changes
 4. Push to the branch
 5. Create a Pull Request
+
+## Security Notes
+
+- Never commit your OpenAI API key
+- Use environment variables for sensitive data
+- Keep your Python packages updated
+- Follow Chrome extension security best practices
 
 ## License
 
