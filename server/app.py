@@ -449,12 +449,9 @@ SUGGESTION: Include relevant certifications
                         suggestions.append(suggestion)
 
         return jsonify({
-            'atsScore': ats_score,
-            'interviewChance': interview_chance,
             'generatedResume': resume_content.strip(),
             'generatedCoverLetter': cover_letter_content.strip(),
-            'suggestions': suggestions,
-            'missingKeywords': []  # Added for consistency
+            'suggestions': suggestions
         })
 
     except Exception as e:
