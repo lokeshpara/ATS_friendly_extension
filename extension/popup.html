@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume Optimizer</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="styles.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 p-6" style="width: 600px;">
+    <div class="container mx-auto">
+        <h1 class="text-2xl font-bold text-gray-800 mb-4">ATS Resume Optimizer</h1>
+        
+        <!-- Tab Navigation -->
+        <div class="mb-4">
+            <button id="optimizeBtn" class="tab-btn active">Optimize Existing</button>
+            <button id="createBtn" class="tab-btn">Create New</button>
+        </div>
+
+        <!-- Optimize Existing Tab -->
+        <div id="optimizeSection" class="tab-content active">
+            <div class="bg-white rounded-lg p-4 shadow-md mb-4">
+                <h2 class="text-xl font-semibold mb-3">Upload Documents</h2>
+                <div class="space-y-4">
+                    <div class="upload-section">
+                        <label class="block text-sm font-medium text-gray-700">Resume (PDF/DOC)</label>
+                        <input type="file" id="resumeUpload" class="file-input" accept=".pdf,.doc,.docx">
+                    </div>
+                    <div class="upload-section">
+                        <label class="block text-sm font-medium text-gray-700">Cover Letter (PDF/DOC)</label>
+                        <input type="file" id="coverLetterUpload" class="file-input" accept=".pdf,.doc,.docx">
+                    </div>
+                    <div class="upload-section">
+                        <label class="block text-sm font-medium text-gray-700">Job Description</label>
+                        <textarea id="jobDescription" class="w-full h-32 p-2 border rounded" placeholder="Paste job description here..."></textarea>
+                    </div>
+                </div>
+                <button id="analyzeBtn" class="primary-btn mt-4">Analyze & Optimize</button>
+            </div>
+        </div>
+
+        <!-- Create New Tab -->
+        <div id="createSection" class="tab-content hidden">
+            <div class="bg-white rounded-lg p-4 shadow-md mb-4">
+                <h2 class="text-xl font-semibold mb-3">Create ATS-Optimized Documents</h2>
+                <div class="space-y-4">
+                    <div class="input-section">
+                        <label class="block text-sm font-medium text-gray-700">Job Description</label>
+                        <textarea id="newJobDescription" class="w-full h-32 p-2 border rounded" placeholder="Paste job description here..."></textarea>
+                    </div>
+                    <div class="input-section">
+                        <label class="block text-sm font-medium text-gray-700">Your Prompts</label>
+                        <textarea id="experience" class="w-full h-32 p-2 border rounded" placeholder="Enter your Prompt to tell the AI what you want in your resume and cover letter"></textarea>
+                    </div>
+                </div>
+                <button id="generateBtn" class="primary-btn mt-4">Generate Documents</button>
+            </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="resultsSection" class="hidden">
+            <div class="bg-white rounded-lg p-4 shadow-md mb-4">
+                <h2 class="text-xl font-semibold mb-3">Analysis Results</h2>
+                <div class="grid grid-cols-2 gap-4 mb-4">
+                    <div class="score-card">
+                        <h3>ATS Score</h3>
+                        <div id="atsScore" class="score">0%</div>
+                    </div>
+                    <div class="score-card">
+                        <h3>Interview Chance</h3>
+                        <div id="interviewScore" class="score">0%</div>
+                    </div>
+                </div>
+                <div id="keywordsMissing" class="mb-4">
+                    <h3 class="font-semibold mb-2">Missing Keywords</h3>
+                    <div id="keywordsList" class="keywords-container"></div>
+                </div>
+                <div id="suggestions" class="mb-4">
+                    <h3 class="font-semibold mb-2">Suggested Improvements</h3>
+                    <ul id="suggestionsList" class="list-disc pl-4"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="config.js"></script>
+    <script src="popup.js"></script>
+</body>
+</html> 
