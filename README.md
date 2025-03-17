@@ -23,14 +23,26 @@ A Chrome extension and server application for optimizing resumes and cover lette
 ```
 ATS_Optimize/
 ├── server/
-│   ├── app.py             # Flask server implementation
-│   └── requirements.txt   # Python dependencies
+│   ├── app.py                 # Flask server implementation
+│   ├── requirements.txt       # Python dependencies
+│   ├── .env                  # Environment variables (create this file)
+│   └── venv/                 # Python virtual environment (generated)
+│
 ├── extension/
-│   ├── popup.html        # Extension UI
-│   ├── popup.js         # Extension logic
-│   ├── styles.css       # UI styling
-│   └── manifest.json    # Extension configuration
-└── README.md            # This file
+│   ├── manifest.json         # Extension configuration
+│   ├── popup.html           # Extension UI
+│   ├── popup.js             # Main extension logic
+│   ├── background.js        # Background service worker
+│   ├── content.js           # Content script for page interaction
+│   ├── config.js            # Extension configuration
+│   ├── styles.css           # UI styling
+│   └── images/              # Extension icons and images
+│       ├── icon-16.png
+│       ├── icon-32.png
+│       ├── icon-48.png
+│       └── icon-128.png
+│
+└── README.md                # Documentation
 ```
 
 ## Setup Instructions
@@ -41,6 +53,15 @@ ATS_Optimize/
 - Google Chrome browser
 - pip (Python package installer)
 - Git (optional, for cloning)
+
+### Environment Setup
+
+Create a `.env` file in the server directory with the following content:
+```
+OPENAI_API_KEY=your-api-key-here
+FLASK_ENV=development
+PORT=5002
+```
 
 ### Server Setup
 
